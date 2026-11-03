@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!--
+=====================================================================
+  WELCOME! HOW TO USE THIS FILE (read me first)
+=====================================================================
+  This is your whole portfolio website in ONE file. You do not need
+  to know how to code. Just look for comments like this one that say
+  "CHANGE THIS" and edit the text next to them.
+
+  QUICK STEPS
+  1. Open index.html in any browser to preview it (double-click it).
+  2. Open it in a text editor (Notepad, VS Code) to make changes.
+  3. Save the file, then refresh the browser to see your changes.
+  4. Put your pictures inside the "images" folder next to this file.
+
+  WHAT TO LOOK FOR
+  - Anything between <!--  and  -->  is a comment. Visitors never
+    see comments. They are notes for YOU.
+  - Search (Ctrl+F) for the words "CHANGE THIS" to jump to each
+    place you can edit.
+  - Don't delete the < > symbols or the words inside them like
+    <div> or </div>. Only change the plain text between them.
+=====================================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CHANGE THIS: the title shown on the browser tab -->
+  <title>Sherifiddeen Aadam | Data Analyst Portfolio</title>
+  <meta name="description" content="Portfolio of Sherifiddeen Aadam, Data Analyst and Business Analyst working with Excel, SQL and Power BI.">
+
+  <!-- Fonts and icons loaded from the internet (CDN). Leave these alone. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    /* ===============================================================
+       STYLES (the look of the site)
+       CHANGE THIS (optional): to change the accent colour everywhere,
+       edit the one value after --accent below. Any hex colour works.
+       =============================================================== */
+    :root {
+      --accent: #5e81ac;
+      --accent-dark: #4c6a91;
+      --text: #3d4449;
+      --heading: #2e3338;
+      --muted: #7f888f;
+      --line: #e3e7ea;
+      --soft: #f5f7fa;
+      --sidebar-w: 19rem;
+      --header-h: 4.25rem;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 1rem); }
+    body {
+      background: #fff; color: var(--text);
+      font-family: "Source Sans 3", sans-serif; font-size: 1.05rem; line-height: 1.7;
+    }
+    h1, h2, h3 { font-family: "Source Serif 4", serif; color: var(--heading); line-height: 1.25; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-dark); }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+    /* ---------- Fixed left sidebar ---------- */
+    #sidebar {
+      position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-w);
+      background: var(--soft); border-right: 1px solid var(--line);
+      padding: 2.5rem 2rem 1.75rem; display: flex; flex-direction: column; z-index: 20;
+    }
+    #sidebar .name { font-size: 1.75rem; font-weight: 700; }
+    #sidebar .title { margin-top: .6rem; font-size: .95rem; color: var(--muted); line-height: 1.5; }
+    #sidebar nav { margin-top: 2.5rem; }
+    #sidebar nav a {
+      display: block; padding: .65rem 0 .65rem 1rem; color: var(--heading); font-weight: 600;
+      border-left: 3px solid transparent;
+    }
+    #sidebar nav a:hover, #sidebar nav a.active { color: var(--accent); border-left-color: var(--accent); }
+    .social { list-style: none; display: flex; gap: .5rem; }
+    .social a {
+      display: flex; width: 2.4rem; height: 2.4rem; align-items: center; justify-content: center;
+      border-radius: 50%; color: var(--muted); border: 1px solid var(--line); background: #fff;
+    }
+    .social a:hover { color: #fff; background: var(--accent); border-color: var(--accent); }
+    #sidebar .social { margin-top: auto; }
+
+    /* ---------- Main area and top header bar ---------- */
+    #main { margin-left: var(--sidebar-w); }
+    #header {
+      position: sticky; top: 0; z-index: 10; height: var(--header-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line);
+    }
+    #header .logo { font-family: "Source Serif 4", serif; font-size: 1.35rem; font-weight: 700; color: var(--heading); }
+    #header .logo span { color: var(--accent); }
+    .inner { padding: 0 3rem; max-width: 70rem; }
+    section { padding: 3.5rem 0; border-bottom: 1px solid var(--line); }
+    section h2 { font-size: 2rem; margin-bottom: 1.5rem; }
+
+    /* ---------- Banner (bio left, photo right) ---------- */
+    #banner .row { display: flex; align-items: center; gap: 3rem; }
+    #banner .text { flex: 1; }
+    #banner h1 { font-size: 2.6rem; margin-bottom: 1rem; }
+    #banner p + p { margin-top: 1rem; }
+    #banner .btns { margin-top: 1.75rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    .photo {
+      flex: 0 0 18rem; width: 18rem; height: 18rem; border-radius: 50%; overflow: hidden;
+      border: 6px solid #fff; box-shadow: 0 0 0 2px var(--accent);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ---------- Buttons ---------- */
+    .button {
+      display: inline-block; padding: .6rem 1.5rem; border-radius: 4px; font-weight: 600;
+      background: var(--accent); color: #fff; border: 2px solid var(--accent);
+    }
+    .button:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+    .button.alt { background: transparent; color: var(--accent); }
+    .button.alt:hover { background: var(--accent); color: #fff; }
+
+    /* ---------- Projects: 3-column grid ---------- */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+    .card { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+    .card img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; background: var(--soft); }
+    .card .body { padding: 1.25rem 1.25rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+    .card h3 { font-size: 1.25rem; margin-bottom: .5rem; }
+    .card p { font-size: .98rem; margin-bottom: 1.25rem; flex: 1; }
+    .card .button { align-self: flex-start; padding: .45rem 1.2rem; font-size: .95rem; }
+
+    /* ---------- Contact ---------- */
+    .contact-list { list-style: none; }
+    .contact-list li { display: flex; align-items: center; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+    .contact-list li:last-child { border-bottom: 0; }
+    .contact-list i { width: 2.4rem; height: 2.4rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--soft); color: var(--accent); }
+    .contact-list strong { display: block; font-size: .9rem; color: var(--muted); font-weight: 600; line-height: 1.3; }
+    .contact-list a, .contact-list span { word-break: break-word; }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 2rem 0 2.5rem; color: var(--muted); font-size: .92rem; }
+
+    /* ---------- Tablet and phone layouts ---------- */
+    @media (max-width: 1200px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 960px) {
+      #sidebar { position: static; width: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 1.75rem 1.5rem; }
+      #sidebar nav { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
+      #sidebar nav a { padding: .3rem 0; border-left: 0; border-bottom: 3px solid transparent; }
+      #sidebar nav a:hover, #sidebar nav a.active { border-bottom-color: var(--accent); }
+      #sidebar .social { margin-top: 1.25rem; }
+      #main { margin-left: 0; }
+      #header { padding: 0 1.5rem; position: static; }
+      html { scroll-padding-top: 1rem; }
+      .inner { padding: 0 1.5rem; }
+      #banner .row { flex-direction: column-reverse; align-items: flex-start; gap: 2rem; }
+      .photo { flex-basis: auto; width: 14rem; height: 14rem; }
+    }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } #banner h1 { font-size: 2rem; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+<!-- =================================================================
+     1. LEFT SIDEBAR  (name, job title, menu links, social icons)
+     ================================================================= -->
+<aside id="sidebar">
+  <!-- CHANGE THIS: your name -->
+  <div class="name">Sherifiddeen Aadam</div>
+  <!-- CHANGE THIS: your job title (keep it short here; the sidebar is narrow) -->
+  <div class="title">Data Analyst &amp; Business Analyst | Excel, SQL &amp; Power BI | Data Analysis, Business Insights &amp; Visualization</div>
+
+  <!-- MENU LINKS. Each link jumps to a section further down the page.
+       The part after the # (like #about) must match the id="about" of
+       a section. Only change the visible word (About, Projects...). -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- SOCIAL ICONS (bottom of the sidebar).
+       CHANGE THIS: replace each href="..." with your own link.
+       - Email: keep "mailto:" in front of your address.
+       - GitHub: replace the "#" with your GitHub profile link,
+         e.g. https://github.com/your-username
+       To remove an icon, delete its whole <li>...</li> line.
+       To add another (X, Instagram...), copy a line and find the
+       icon name at https://fontawesome.com/icons -->
+  <ul class="social">
+    <li><a href="https://www.linkedin.com/in/sherifiddeen-ademoh-114bb2279" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+    <li><a href="#" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a></li>
+    <li><a href="mailto:ademohsherifideen@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a></li>
+  </ul>
+</aside>
+
+<div id="main">
+
+  <!-- =================================================================
+       2. TOP HEADER BAR  ("Portfolio" logo + social icons)
+       CHANGE THIS: put your own links in the icons below too.
+       (Use the same links you used in the sidebar.)
+       ================================================================= -->
+  <header id="header">
+    <a href="#" class="logo">Port<span>folio</span></a>
+    <ul class="social">
+      <li><a href="https://www.linkedin.com/in/sherifiddeen-ademoh-114bb2279" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a></li>
+      <li><a href="#" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a></li>
+      <li><a href="mailto:ademohsherifideen@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a></li>
+    </ul>
+  </header>
+
+  <div class="inner">
+
+    <!-- =================================================================
+         3. BANNER / ABOUT  (bio on the left, round photo on the right)
+         ================================================================= -->
+    <section id="about">
+      <div id="banner">
+        <div class="row">
+          <div class="text">
+            <!-- CHANGE THIS: your headline -->
+            <h1>Hi, I'm Sherifiddeen. I turn raw data into decisions.</h1>
+
+            <!-- CHANGE THIS: your bio. Each <p>...</p> is one paragraph.
+                 To add a paragraph, copy a <p>...</p> line and paste it below. -->
+            <p>I am a Data Analyst with a background in Mathematics and a strong interest in using data to solve problems and support informed decision-making. I work with tools such as Microsoft Excel, SQL, and Power BI to clean, analyze, and visualize data, transforming raw information into meaningful insights.</p>
+            <p>Through hands-on projects and continuous learning, I am developing my skills in data analytics, business intelligence, and dashboard development. I am open to Data Analyst opportunities, freelance projects, and collaborations where I can apply my skills, learn from others, and create value through data.</p>
+
+            <div class="btns">
+              <a href="#projects" class="button">See my projects</a>
+              <a href="#contact" class="button alt">Get in touch</a>
+            </div>
+          </div>
+
+          <!-- ===========================================================
+               YOUR PROFILE PHOTO  (the circle on the right)
+               HOW TO CHANGE IT:
+               1. Copy your photo into the "images" folder.
+                  Name it simply, e.g. profile.jpg  (no spaces).
+               2. Below, replace the long src="data:image/svg+xml..."
+                  with:  src="images/profile.jpg"
+                  (Use your real file name and ending: .jpg .png .webp)
+               3. Change alt="..." to a short description of the photo.
+               Tip: a square photo (e.g. 800 x 800 pixels) works best.
+               The grey picture below is only a placeholder.
+               =========================================================== -->
+          <div class="photo">
+            <img alt="Placeholder for Sherifiddeen's profile photo"
+                 src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%23e8edf3'/%3E%3Ccircle cx='200' cy='155' r='62' fill='%235e81ac' opacity='.55'/%3E%3Cpath d='M70 400c0-85 58-140 130-140s130 55 130 140z' fill='%235e81ac' opacity='.55'/%3E%3C/svg%3E">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         4. PROJECTS  (3-column card grid)
+
+         HOW TO EDIT THE DEMO CARD
+         Each project is one block that starts with <article class="card">
+         and ends with </article>. Inside you can change:
+           - PROJECT IMAGE:  the src="..." inside <img>
+           - PROJECT TITLE:  the text inside <h3>...</h3>
+           - DESCRIPTION:    the text inside <p>...</p>
+           - PROJECT LINK:   the href="#" on the "View Project" button
+
+         HOW TO ADD MORE PROJECTS (duplicate a card)
+         1. Select everything from <article class="card"> down to its
+            matching </article>  (the whole block).
+         2. Copy it (Ctrl+C).
+         3. Click on the empty line right AFTER that </article>
+            and paste (Ctrl+V).
+         4. Edit the image, title, description and link of the copy.
+         5. Repeat for every project. The grid arranges itself: 3 per
+            row on a computer, 2 on a tablet, 1 on a phone.
+         To remove a project, delete its whole block.
+         ================================================================= -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+
+        <!-- ======== START OF PROJECT CARD (copy from here...) ======== -->
+        <article class="card">
+
+          <!-- PROJECT IMAGE:
+               1. Save a screenshot of your project (e.g. your Power BI
+                  dashboard) in the "images" folder, e.g. sales-dashboard.png
+               2. Replace the long src="data:image/svg+xml..." with
+                  src="images/sales-dashboard.png"
+               3. Change alt="..." to describe the picture (helps
+                  visitors who use screen readers).
+               Tip: wide images (about 1200 x 750 pixels) look best. -->
+          <img alt="Placeholder image for a project"
+               src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'%3E%3Crect width='640' height='400' fill='%23e8edf3'/%3E%3Cg fill='%235e81ac'%3E%3Crect x='170' y='220' width='50' height='90' opacity='.45'/%3E%3Crect x='245' y='170' width='50' height='140' opacity='.65'/%3E%3Crect x='320' y='120' width='50' height='190' opacity='.85'/%3E%3Crect x='395' y='190' width='50' height='120' opacity='.6'/%3E%3C/g%3E%3Crect x='150' y='310' width='340' height='4' fill='%235e81ac'/%3E%3C/svg%3E">
+
+          <div class="body">
+            <!-- PROJECT TITLE: replace the words below with your project name -->
+            <h3>Sales Performance Dashboard</h3>
+
+            <!-- PROJECT DESCRIPTION: 1 to 3 short sentences about what you
+                 did, which tools you used, and what you found. -->
+            <p>Demo project. Replace this text with a short summary of your project: the question you answered, the tools you used (Excel, SQL, Power BI) and the result.</p>
+
+            <!-- PROJECT LINK: replace the # below with the web address of
+                 your project, e.g. href="https://github.com/you/project"
+                 or a published Power BI report link.
+                 The target="_blank" part opens it in a new tab. -->
+            <a href="#" class="button" target="_blank" rel="noopener">View Project</a>
+          </div>
+        </article>
+        <!-- ======== END OF PROJECT CARD (...to here, then paste below) ======== -->
+
+        <!-- PASTE YOUR COPIED CARDS HERE -->
+
+      </div>
+    </section>
+
+    <!-- =================================================================
+         5. CONTACT
+         CHANGE THIS: update your email, LinkedIn and location below.
+         ================================================================= -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p style="margin-bottom:1rem">Open to Data Analyst roles, freelance projects and collaborations. I'd love to hear from you.</p>
+      <ul class="contact-list">
+        <!-- EMAIL: change the address in BOTH places (the link and the visible text) -->
+        <li><i class="fa-solid fa-envelope"></i>
+          <div><strong>Email</strong><a href="mailto:ademohsherifideen@gmail.com">ademohsherifideen@gmail.com</a></div></li>
+        <!-- LINKEDIN: change the web address in BOTH places -->
+        <li><i class="fa-brands fa-linkedin-in"></i>
+          <div><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/sherifiddeen-ademoh-114bb2279" target="_blank" rel="noopener">linkedin.com/in/sherifiddeen-ademoh</a></div></li>
+        <!-- LOCATION: just change the text -->
+        <li><i class="fa-solid fa-location-dot"></i>
+          <div><strong>Location</strong><span>Abuja, Nigeria</span></div></li>
+      </ul>
+    </section>
+
+    <!-- =================================================================
+         6. FOOTER
+         CHANGE THIS: the year and name update by themselves (the year
+         comes from the small script at the bottom of this file).
+         ================================================================= -->
+    <footer>
+      &copy; <span id="year">2026</span> Sherifiddeen Aadam. All rights reserved.
+    </footer>
+
+  </div>
+</div>
+
+<!-- =================================================================
+     SMALL SCRIPT (you don't need to change anything below)
+     It sets the footer year automatically and highlights the menu
+     link of the section you are viewing.
+     ================================================================= -->
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var links = document.querySelectorAll('#sidebar nav a');
+  var sections = [].map.call(links, function (a) { return document.querySelector(a.getAttribute('href')); });
+  function highlight() {
+    var pos = window.scrollY + 140, current = 0;
+    sections.forEach(function (s, i) { if (s && s.offsetTop <= pos) current = i; });
+    links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+  }
+  window.addEventListener('scroll', highlight, { passive: true });
+  highlight();
+</script>
+
+<!--
+=====================================================================
+  PUBLISHING ON GITHUB PAGES (free)
+  1. Create a GitHub repository and upload index.html and the
+     images folder.
+  2. Repository Settings > Pages > choose the "main" branch > Save.
+  3. After a minute your site is live at
+     https://YOUR-USERNAME.github.io/REPOSITORY-NAME/
+  (The images folder contains a file called .gitkeep. It only makes
+   sure GitHub keeps the folder even when it's empty. Leave it be.)
+=====================================================================
+-->
+</body>
+</html>
